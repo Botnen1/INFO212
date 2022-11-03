@@ -27,6 +27,9 @@ from .views import save_employee
 from .views import save_customer
 from .views import update_customer
 from .views import delete_customer
+from .views import order_car, rent_car, cancel_order_car, return_car
+
+""" from .views import order_car """
 
 
 
@@ -47,5 +50,9 @@ urlpatterns = [
     path("update_customer/<int:id>", update_customer),
     path("delete_customer/<int:id>", delete_customer),
     
+    path("order_car/<int:customer_id>/<int:car_id>", order_car),
+    path("rent_car/<int:customer_id>/<int:car_id>", rent_car),
+    path("cancel_order_car/<int:customer_id>/<int:car_id>", cancel_order_car),
+    path("return_car/<int:customer_id>/<int:car_id>", return_car),
     
 ]

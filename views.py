@@ -1,10 +1,12 @@
 from .models import Car
 from .models import Employee
 from .models import Customer
+from .models import Order
 from rest_framework.response import Response
 from .serializers import CarSerializer
 from .serializers import EmployeeSerializer
 from .serializers import CustomerSerializer
+from .serializers import OrderSerializer
 from rest_framework import status
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
@@ -129,3 +131,52 @@ def delete_employee(request, id):
         return Response(status=status.HTTP_404_NOT_FOUND)    
     theEmployee.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+@api_view(['ORDER-CAR'])
+def order_car(request, customer_id, car_id):
+    customer = Customer.objects.get(pk=customer_id)
+    car = Car.object.get(pk=car_id)
+    if customer.hasbooked == False and car.status == "Available":
+        customer.hasbooked = True
+        car.status = "Booked"
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+        
+    
+
+@api_view(['CANCEL-ORDER-CAR'])
+def cancel_order_car(request, customer_id, car_id):
+    customer = Customer.objects.get(pk=customer_id)
+    car = Car.object.get(pk=car_id)
+    if customer.hasbooked == True and car.status == "Booked":
+        customer.hasbooked = False
+        car.status = "Available"
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+@api_view(['RENT-CAR'])
+def rent_car(request, customer_id, car_id):
+    customer = Customer.objects.get(pk=customer_id)
+    car = Car.object.get(pk=car_id)
+    if customer.hasbooked == True and car.status == "Booked":
+        car.status = "Rented"
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['RETURN-CAR'])
+def return_car(request, customer_id, car_id):
+    customer = Customer.objects.get(pk=customer_id)
+    car = Car.object.get(pk=car_id)
+    if customer.hasbooked == True and car.status == "Rented":
+        if Car.c_is_damaged != False:
+            Car.status = "Damaged"
+        else:
+            Car.status = "Available"
+
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)
