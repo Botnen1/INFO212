@@ -92,7 +92,7 @@ def save_car(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-@api_view(['PUT'])
+@api_view(['PATCH'])
 def update_car(request, id):
     try:
         theCar = Car.objects.get(pk=id)
@@ -134,7 +134,7 @@ def delete_employee(request, id):
 
 
 
-@api_view(['ORDER-CAR'])
+@api_view(['PATCH'])
 def order_car(request, customer_id, car_id):
     customer = Customer.objects.get(pk=customer_id)
     car = Car.object.get(pk=car_id)
