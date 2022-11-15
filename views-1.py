@@ -17,6 +17,7 @@ def get_cars(request):
     print(serializer.data)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
+
 @api_view(['POST'])
 def save_car(request):
     serializer = CarSerializer(data=request.data)

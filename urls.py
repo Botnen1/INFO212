@@ -33,6 +33,7 @@ from .views import order_car, rent_car, cancel_order_car, return_car
 
 
 
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("cars/", get_cars),

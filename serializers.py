@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from .models import Car, Customer, Employee, Order
 
+
+
 class CarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Car
