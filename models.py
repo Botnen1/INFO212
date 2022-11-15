@@ -39,7 +39,7 @@ class Customer(models.Model):
     
     def __str__(self) -> str:
         return self.name + " " + self.address + " " + self.age
-
+#test
 
 class Order(models.Model):
     Ola = "Ola"
