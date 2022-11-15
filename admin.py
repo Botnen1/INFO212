@@ -3,10 +3,7 @@ from .models import Car
 from .models import Employee
 from .models import Customer
 from .models import Order
-
-
 #test2
-
 admin.site.register(Employee)
 admin.site.register(Car)
 admin.site.register(Customer)
